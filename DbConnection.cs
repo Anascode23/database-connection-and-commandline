@@ -1,9 +1,9 @@
-public class DbConnection
+public abstract class DbConnection
 {
     private string _connectionstring;
-    private TimeSpan _timeout;
+   // private TimeSpan _timeout;
 
-    public string ConnectionString
+    private string ConnectionString
     {
         get { return _connectionstring; }
         set { _connectionstring = value; }
@@ -12,16 +12,11 @@ public class DbConnection
 public DbConnection(string connectionstring)  
 {
     _connectionstring = connectionstring;
-    if(!string.IsNullOrEmpty(ConnectionString))
-    throw new ArgumentException(ConnectionString);
+    if(string.IsNullOrWhiteSpace(ConnectionString))
+    throw new ArgumentException("Value cant be null or empty");
     
 }
-    public void Open()
-    {
-
-    }
-    public void Close()
-    {
-
-    }
+    public abstract void Open();
+    
+    public abstract void Close();
 }
